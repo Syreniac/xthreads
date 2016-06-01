@@ -93,15 +93,7 @@ void task2(interface my_interface client i1, int a){
 }
 
 int main(unsigned int argc, char *unsafe argv[argc]){
-    /*interface my_interface i1;
-    par{
-        on tile[0].core[0]: task(i1,1);
-        on tile[0].core[0]: task2(i1,1);
-    }*/
     printf("A");
-    //void * unsafe ptr = null;
-    //unsafe{
-    //}
     theoreticalCreateThread();
     printf("A");
     return 0;
