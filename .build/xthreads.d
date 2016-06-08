@@ -1,2 +1,1 @@
-xthreads.o: ../src/xthreads.xc
-
+xthreads.o: ../src/xthreads.c
