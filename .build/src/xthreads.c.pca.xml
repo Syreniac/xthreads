@@ -1,52 +1,50 @@
 <preCompilationAnalysis file="../src/xthreads.c">
-  <fCall global="true" name="theoreticalThreadTask"/>
-  <fCall global="true" name="theoreticalThreadTask.nstackwords"/>
+  <fCall global="true" name="printBytes"/>
+  <fCall global="true" name="printBytes.nstackwords"/>
   <fCall global="true" name="iprintf.nstackwords"/>
-  <fCall global="true" name="theoreticalThreadTask.maxcores"/>
+  <fCall global="true" name="printBytes.maxcores"/>
   <fCall global="true" name="iprintf.maxcores"/>
-  <fCall global="true" name="theoreticalThreadTask.maxtimers"/>
+  <fCall global="true" name="printBytes.maxtimers"/>
   <fCall global="true" name="iprintf.maxtimers"/>
-  <fCall global="true" name="theoreticalThreadTask.maxchanends"/>
+  <fCall global="true" name="printBytes.maxchanends"/>
   <fCall global="true" name="iprintf.maxchanends"/>
-  <fCall global="true" name="theoreticalThreadStart"/>
-  <fCall global="true" name="theoreticalThreadStart.nstackwords"/>
-  <fCall global="true" name="puts.nstackwords"/>
-  <fCall global="true" name="theoreticalThreadStart.maxcores"/>
-  <fCall global="true" name="puts.maxcores"/>
-  <fCall global="true" name="theoreticalThreadStart.maxtimers"/>
-  <fCall global="true" name="puts.maxtimers"/>
-  <fCall global="true" name="theoreticalThreadStart.maxchanends"/>
-  <fCall global="true" name="puts.maxchanends"/>
-  <fCall global="true" name="theoreticalCreateThread"/>
-  <fCall global="true" name="theoreticalCreateThread.nstackwords"/>
+  <fCall global="true" name="xthreads_create"/>
+  <fCall global="true" name="xthreads_create.nstackwords"/>
   <fCall global="true" name="exit.nstackwords"/>
-  <fCall global="true" name="theoreticalCreateThread.maxcores"/>
+  <fCall global="true" name="puts.nstackwords"/>
+  <fCall global="true" name="xthreads_create.maxcores"/>
   <fCall global="true" name="exit.maxcores"/>
-  <fCall global="true" name="theoreticalCreateThread.maxtimers"/>
+  <fCall global="true" name="puts.maxcores"/>
+  <fCall global="true" name="xthreads_create.maxtimers"/>
   <fCall global="true" name="exit.maxtimers"/>
-  <fCall global="true" name="theoreticalCreateThread.maxchanends"/>
+  <fCall global="true" name="puts.maxtimers"/>
+  <fCall global="true" name="xthreads_create.maxchanends"/>
   <fCall global="true" name="exit.maxchanends"/>
-  <fCall global="true" name="theoreticalDetachThread"/>
-  <fCall global="true" name="theoreticalDetachThread.nstackwords"/>
-  <fCall global="true" name="theoreticalDetachThread.maxcores"/>
-  <fCall global="true" name="theoreticalDetachThread.maxtimers"/>
-  <fCall global="true" name="theoreticalDetachThread.maxchanends"/>
-  <fCall global="true" name="theoreticalJoinThread"/>
-  <fCall global="true" name="theoreticalJoinThread.nstackwords"/>
-  <fCall global="true" name="theoreticalJoinThread.maxcores"/>
-  <fCall global="true" name="theoreticalJoinThread.maxtimers"/>
-  <fCall global="true" name="theoreticalJoinThread.maxchanends"/>
-  <fCall global="true" name="main"/>
-  <fCall global="true" name="main.nstackwords"/>
-  <fCall global="true" name="main.maxcores"/>
-  <fCall global="true" name="main.maxtimers"/>
-  <fCall global="true" name="main.maxchanends"/>
-  <fCall global="true" name="G_INT"/>
-  <fCall global="true" name="synchroniserIds.globound"/>
-  <fCall global="true" name="synchroniserIds"/>
+  <fCall global="true" name="puts.maxchanends"/>
+  <fCall global="true" name="xthreads_task"/>
+  <fCall global="true" name="xthreads_task_test"/>
+  <fCall global="true" name="xthreads_task_test.nstackwords"/>
+  <fCall global="true" name="xthreads_task_test.maxcores"/>
+  <fCall global="true" name="xthreads_task_test.maxtimers"/>
+  <fCall global="true" name="xthreads_task_test.maxchanends"/>
+  <fCall global="true" name="xthreads_detach"/>
+  <fCall global="true" name="xthreads_detach.nstackwords"/>
+  <fCall global="true" name="putchar.nstackwords"/>
+  <fCall global="true" name="xthreads_detach.maxcores"/>
+  <fCall global="true" name="putchar.maxcores"/>
+  <fCall global="true" name="xthreads_detach.maxtimers"/>
+  <fCall global="true" name="putchar.maxtimers"/>
+  <fCall global="true" name="xthreads_detach.maxchanends"/>
+  <fCall global="true" name="putchar.maxchanends"/>
+  <fCall global="true" name="xthreads_join"/>
+  <fCall global="true" name="xthreads_join.nstackwords"/>
+  <fCall global="true" name="xthreads_join.maxcores"/>
+  <fCall global="true" name="xthreads_join.maxtimers"/>
+  <fCall global="true" name="xthreads_join.maxchanends"/>
   <fCall global="true" name="xthreads_Stacks.globound"/>
   <fCall global="true" name="xthreads_Stacks"/>
   <fCall global="true" name="exit"/>
   <fCall global="true" name="iprintf"/>
   <fCall global="true" name="puts"/>
+  <fCall global="true" name="putchar"/>
 </preCompilationAnalysis>
