@@ -1,0 +1,4 @@
+<preCompilationAnalysis file="../src/xthreads_once.c">
+  <fCall global="true" name="xthreads_once"/>
+  <fCall global="true" name="xthreads_self"/>
+</preCompilationAnalysis>

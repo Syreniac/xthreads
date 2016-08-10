@@ -9,13 +9,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define M 3
+#define M 4
 #define K 2
-#define N 3
+#define N 4
 #define NUM_THREADS 10
 
 int A [M][K] = { {1,5}, {2,6}, {3,7}, {4,8} };
-int B [K][N] = { {8,7,6}, {5,4,3} };
+int B [K][N] = { {8,7,6,5}, {4,3,2,1} };
 int C [M][N];
 
 struct v {
@@ -25,9 +25,10 @@ struct v {
 
 void runner(void *param); /* the thread */
 
-int main(int argc, char *argv[]) {
+/*int main(int argc, char *argv[]) {
 
-   int i,j, count = 0;
+    int i,j, count = 0;
+
    for(i = 0; i < M; i++) {
       for(j = 0; j < N; j++) {
          //Assign a row and column for each thread
@@ -38,22 +39,15 @@ int main(int argc, char *argv[]) {
          pthread_t tid;       //Thread ID
          pthread_attr_t attr; //Set of thread attributes
 
-         /* To demonstrate that both synchronised and unsynchronised threads work,
-          * I've hacked this together.
-          * The final thread is a synchronised one, that will allow the main thread to wait
-          * until the others are completed in a not-totally-horrid way.
-         */
+          //To demonstrate that both synchronised and unsynchronised threads work,
+          //I've hacked this together.
+          //The final thread is a synchronised one, that will allow the main thread to wait
+          //until the others are completed in a not-totally-horrid way.
 
 
-         if(i == M-1 && j == N-1){
-             attr.detachState = XTHREADS_CREATE_UNDETACHED;
-             pthread_create(&tid,&attr,runner,data);
-             pthread_join(tid, NULL);
-         }
-         else{
-             attr.detachState = XTHREADS_CREATE_DETACHED;
-             pthread_create(&tid,&attr,runner,data);
-         }
+         attr.detachState = XTHREADS_CREATE_UNDETACHED;
+         pthread_create(&tid,&attr,runner,data);
+         pthread_detach(tid);
          count++;
       }
    }
@@ -65,7 +59,7 @@ int main(int argc, char *argv[]) {
       }
       printf("\n");
    }
-}
+}*/
 
 //The thread will begin control in this function
 void runner(void *param) {
@@ -80,6 +74,5 @@ void runner(void *param) {
    C[data->i][data->j] = sum;
 
    //Exit the thread
-   //pthread_exit(0);
-   return;
+   pthread_exit(0);
 }

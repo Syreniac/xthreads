@@ -1,0 +1,19 @@
+<preCompilationAnalysis file="../src/xthreads_create.c">
+  <fCall global="true" name="xthreads_create"/>
+  <fCall global="true" name="xthreads_create.nstackwords"/>
+  <fCall global="true" name="puts.nstackwords"/>
+  <fCall global="true" name="exit.nstackwords"/>
+  <fCall global="true" name="xthreads_create.maxcores"/>
+  <fCall global="true" name="exit.maxcores"/>
+  <fCall global="true" name="puts.maxcores"/>
+  <fCall global="true" name="xthreads_create.maxtimers"/>
+  <fCall global="true" name="exit.maxtimers"/>
+  <fCall global="true" name="puts.maxtimers"/>
+  <fCall global="true" name="xthreads_create.maxchanends"/>
+  <fCall global="true" name="exit.maxchanends"/>
+  <fCall global="true" name="puts.maxchanends"/>
+  <fCall global="true" name="xthreads_task"/>
+  <fCall global="true" name="exit"/>
+  <fCall global="true" name="xthreads_globals"/>
+  <fCall global="true" name="puts"/>
+</preCompilationAnalysis>

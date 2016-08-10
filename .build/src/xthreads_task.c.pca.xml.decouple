@@ -1,0 +1,11 @@
+<preCompilationAnalysis file="../src/xthreads_task.c">
+  <fCall global="true" name="xthreads_task_cleanup"/>
+  <fCall global="true" name="xthreads_task"/>
+  <fCall global="true" name="xthreads_task_end"/>
+  <fCall global="true" name="xthreads_task_endsudden"/>
+  <fCall global="true" name="free"/>
+  <fCall global="true" name="exit"/>
+  <fCall global="true" name="xthreads_self"/>
+  <fCall global="true" name="xthreads_globals"/>
+  <fCall global="true" name="puts"/>
+</preCompilationAnalysis>

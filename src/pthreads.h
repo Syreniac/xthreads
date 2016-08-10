@@ -38,10 +38,11 @@
 
 #define pthread_create(threadIdPointer, attributes, target, arg){xthreads_create(threadIdPointer, attributes, target, arg);};
 
-#define pthread_detach(threadId){xthreads_detach(threadId)}
+#define pthread_detach(threadId){xthreads_detach(threadId);}
 #define pthread_join(threadId, voidPointer)(xthreads_join(threadId))
 #define pthread_equal(threadIdA, threadIdB){return threadIdA == threadIdB}
 #define pthread_self(){__asm__ __volatile__("get r11, id" : : : "r11");}
+#define pthread_exit(errorCode){return;}
 
 
 

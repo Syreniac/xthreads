@@ -1,0 +1,8 @@
+<preCompilationAnalysis file="../src/xthreads_self.c">
+  <fCall global="true" name="xthreads_self"/>
+  <fCall global="true" name="xthreads_self.nstackwords"/>
+  <fCall global="true" name="xthreads_self.maxcores"/>
+  <fCall global="true" name="xthreads_self.maxtimers"/>
+  <fCall global="true" name="xthreads_self.maxchanends"/>
+  <fCall global="true" name="xthreads_globals"/>
+</preCompilationAnalysis>
