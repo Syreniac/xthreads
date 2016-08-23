@@ -9,7 +9,6 @@
 #define XTHREADS_H_
 
 #include "xthreads_errors.h"
-#include "xthreads_cleanup.h"
 
 #ifndef NULL
 #define NULL 0x0
@@ -46,7 +45,26 @@ typedef unsigned int xthreads_resource_t;
 typedef int xthreads_lock_t;
 typedef unsigned int xthreads_time_t;
 
+typedef enum xthreads_cancelstates{
+    ENABLED,
+    DISABLED,
+    CANCELLED
+} xthreads_cancelstate_t;
+
+typedef enum xthreads_canceltypes{
+    BLANK = 0,
+    ASYNC,
+    DEFERRED
+} xthreads_canceltype_t;
+
+typedef struct xthreads_cleanup_function{
+    void (*function)(void*);
+    void* arg;
+    struct xthreads_cleanup_function *next;
+} xthreads_cleanup_function_t;
+
 struct xthreads_data{
+    char count;
     char detached;
     xthreads_t threadId;
     int resourceId;
@@ -54,9 +72,10 @@ struct xthreads_data{
     xthreads_channel_t threadChannel;
     xthreads_channel_t cancelChannel;
     void *returnedValue;
+    xthreads_channel_t returnChannel;
     xthreads_cleanup_function_t *cleanup;
-    char cancelState;
-    char cancelType;
+    xthreads_cancelstate_t cancelState;
+    xthreads_canceltype_t cancelType;
     void *keys[NUM_OF_KEYS];
 };
 

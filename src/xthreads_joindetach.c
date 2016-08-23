@@ -7,6 +7,11 @@
 
 #include "xthreads.h"
 #include "xthreads_util.h"
+#include "xthreads_access.h"
+#include "xthreads_update.h"
+#include "xthreads_errors.h"
+#include "xthreads_self.h"
+#include "xthreads_cancel.h"
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -35,37 +40,81 @@ void xthreads_detach(xthreads_t threadId){
     return;
 }
 
-void *xthreads_join(xthreads_t threadId){
-    // Bitshift magic to get the lowest byte
-    xthreads_data_t* threadData = (xthreads_data_t*)(&xthreads_globals.stacks[threadId]);
-    int threadType = threadData->resourceId & 0xff;
-    void *returnedValue = NULL;
+void xthreads_join_tempcleanup(void* arg){
+    xthreads_data_t* data = (xthreads_data_t*)arg;
+    data->returnChannel = 0;
+}
 
-    printf("thread type: %d\n",threadType);
+int xthreads_join(xthreads_t threadId, void** retval){
+    xthreads_testcancel();
+    volatile xthreads_data_t* data;
+    const xthreads_t self = xthreads_self_outer();
+    const register xthreads_channel_t selfChannel asm("r10") = xthreads_self_threadChannel(self);
+    void* returned;
 
-    if(threadType == 3){
-        /* When a synchronise thread is created, it waits in a ssync state until
-         * a msync command is received.
-         *
-         * We have to actually start the thread before calling mjoin, because mjoin waits until
-         * the thread is ssync-ing before continuing; if the thread is never started,
-         * mjoin returns immediately and the thread stops.
-         */
-        __asm__ __volatile__(
-                "mjoin res[%0]\n"
-                : : "r" (threadData->resourceId) :
-        );
-
-        returnedValue = threadData->returnedValue;
-        threadData->threadId = 0;
-        threadData->detached = 0;
-        return returnedValue;
+    if(xthreads_check_access(threadId) == 0){
+        return XTHREADS_EINVAL;
     }
-    else{
-        printf("XThreads exception: unjoinable resource id: ");
-        xthreads_printBytes(threadType);
-        printf("\n");
-        exit(1);
+    threadId = threadId % NUM_OF_THREADS;
+    data = &xthreads_globals.stacks[threadId].data;
+    if(data->resourceId == 0){
+        return XTHREADS_EINVAL;
     }
-    return NULL;
+    if(data->detached == XTHREADS_CREATE_DETACHED){
+        return XTHREADS_EINVAL;
+    }
+
+    register xthreads_channel_t returnChannel asm("r9") = data->returnChannel;
+    register xthreads_channel_t otherChannel asm("r8") = data->threadChannel;
+
+    switch(returnChannel){
+        case -1:
+            // The thread is paused waiting for a join
+            // We'll try to put ourself in as the return channel
+            data->returnChannel = selfChannel;
+            __asm__ __volatile__("nop\n");
+            returnChannel = data->returnChannel;
+            if(returnChannel == selfChannel){
+                // We've got in first!
+                // Send a message to wake the joinable thread up
+                __asm__("setd res[%0], %1\n"
+                        "outct res[%0], 1\n"
+                        : : "r" (selfChannel), "r" (otherChannel) :);
+
+                __asm__ __volatile__(
+                        "in %0, res[%1]\n"
+                        "chkct res[%1], 1"
+                        : "=r" (returned) : "r" (selfChannel) :
+                );
+
+                if(retval != NULL){
+                    *retval = returned;
+                }
+
+                return XTHREADS_ENONE;
+            }
+            break;
+        case 0:
+            data->returnChannel = selfChannel;
+            asm("nop\n");
+            returnChannel = data->returnChannel;
+            if(returnChannel == selfChannel){
+                printf("%d\n",data->returnChannel);
+                __asm__ __volatile__(
+                        "in %0, res[%1]\n"
+                        "chkct res[%1], 1"
+                        : "=r" (returned) : "r" (selfChannel) :
+                );
+
+                if(retval != NULL){
+                    *retval = returned;
+                }
+
+                return XTHREADS_ENONE;
+            }
+        default:
+            *retval = (void*)(long)XTHREADS_ECANCELLED;
+            return XTHREADS_EINVAL;
+    }
+    return XTHREADS_EINVAL;
 }

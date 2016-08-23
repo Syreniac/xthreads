@@ -28,8 +28,11 @@
   <fCall global="true" name="xthreads_getspecfic.nstackwords"/>
   <fCall global="true" name="xthreads_self.nstackwords"/>
   <fCall global="true" name="xthreads_getspecfic.maxcores"/>
+  <fCall global="true" name="xthreads_self.maxcores"/>
   <fCall global="true" name="xthreads_getspecfic.maxtimers"/>
+  <fCall global="true" name="xthreads_self.maxtimers"/>
   <fCall global="true" name="xthreads_getspecfic.maxchanends"/>
+  <fCall global="true" name="xthreads_self.maxchanends"/>
   <fCall global="true" name="xthreads_setspecific"/>
   <fCall global="true" name="xthreads_setspecific.nstackwords"/>
   <fCall global="true" name="xthreads_setspecific.maxcores"/>

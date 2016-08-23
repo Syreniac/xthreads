@@ -10,9 +10,10 @@
 #include "xthreads_self.h"
 
 int xthreads_once(volatile xthreads_once_t *controller, void (*routine)(void)){
-    if(controller->doneBy == XTHREADS_NOTHREAD){
-        controller->doneBy = xthreads_self();
-        if(controller->doneBy == xthreads_self()){
+    if(*controller == XTHREADS_NOTHREAD){
+        *controller = xthreads_self();
+        __asm__ __volatile("nop");
+        if(*controller == xthreads_self()){
             routine();
         }
     }

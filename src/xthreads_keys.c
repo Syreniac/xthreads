@@ -7,6 +7,7 @@
 
 #include "xthreads.h"
 #include "xthreads_errors.h"
+#include "xthreads_self.h"
 #include <stdlib.h>
 
 #define XTHREADS_KEY_INUSE 0xb

@@ -8,6 +8,7 @@
 #include "xthreads.h"
 #include "xthreads_channelstack.h"
 #include "xthreads_barrier.h"
+#include "xthreads_access.h"
 
 /* The current barrier implementation is a hybridisation of channel and spinlocking.
  * Theoretically, this means that all the threads should resume as close as possible to the same time,
@@ -25,7 +26,9 @@ static int xthreads_barrier_eq_to_2(volatile xthreads_barrier_t *barrier);
 static int xthreads_barrier_gt_2(volatile xthreads_barrier_t *barrier, xthreads_t currentThreadId);
 static int xthreads_barrier_gt_2_first_thread(volatile xthreads_barrier_t *barrier, xthreads_t currentThreadId);
 static int xthreads_barrier_gt_2_final_thread(volatile xthreads_barrier_t *barrier, xthreads_t currentThreadId);
+#if USING_HYBRID == 1
 static int xthreads_barrier_gt_2_penultimate_thread(volatile xthreads_barrier_t *barrier, xthreads_t currentThreadId);
+#endif
 static int xthreads_barrier_gt_2_generic_thread(volatile xthreads_barrier_t *barrier, xthreads_t currentThreadId);
 
 int xthreads_barrier_init(xthreads_barrier_t *barrier, xthreads_barrierattr_t *attr){
@@ -120,7 +123,7 @@ static int xthreads_barrier_gt_2(volatile xthreads_barrier_t *barrier, xthreads_
 }
 
 static int xthreads_barrier_gt_2_first_thread(volatile xthreads_barrier_t *barrier, xthreads_t currentThreadId){
-    xthreads_channel_t threadChannel = xthreads_globals.stacks[currentThreadId].data.threadChannel;
+    xthreads_channel_t threadChannel = xthreads_access_threadChannel(currentThreadId);
     // Case 1 - First thread to hit the barrier
     //barrier->targetChannel = threadChannel;
     barrier->cont = XTHREADS_BARRIER_WAIT;
@@ -143,7 +146,7 @@ static int xthreads_barrier_gt_2_final_thread(volatile xthreads_barrier_t *barri
     barrier->cont = XTHREADS_BARRIER_CONTINUE;
     xthreads_spin_unlock_inner((xthreads_spin_t*)barrier);
 #else
-    xthreads_channel_t threadChannel = xthreads_globals.stacks[currentThreadId].data.threadChannel;
+    xthreads_channel_t threadChannel = xthreads_access_threadChannel(currentThreadId);
     xthreads_channelstack_cascade(&barrier->channelStack, threadChannel,(xthreads_spin_t*)barrier);
     /*__asm__ __volatile__(
             "setd res[%0], %1\n"
@@ -155,8 +158,9 @@ static int xthreads_barrier_gt_2_final_thread(volatile xthreads_barrier_t *barri
     return XTHREADS_ENONE;
 }
 
+#if USING_HYBRID == 1
 static int xthreads_barrier_gt_2_penultimate_thread(volatile xthreads_barrier_t *barrier, xthreads_t currentThreadId){
-    xthreads_channel_t threadChannel = xthreads_globals.stacks[currentThreadId].data.threadChannel;
+    xthreads_channel_t threadChannel = xthreads_access_threadChannel(currentThreadId);
 
     // Message the threads telling them to wake and start spinning before the final thread hits
     /*__asm__ __volatile__(
@@ -170,9 +174,10 @@ static int xthreads_barrier_gt_2_penultimate_thread(volatile xthreads_barrier_t 
     while(barrier->cont != XTHREADS_BARRIER_CONTINUE){}
     return XTHREADS_ENONE;
 }
+#endif
 
 static int xthreads_barrier_gt_2_generic_thread(volatile xthreads_barrier_t *barrier, xthreads_t currentThreadId){
-    xthreads_channel_t threadChannel = xthreads_globals.stacks[currentThreadId].data.threadChannel;
+    xthreads_channel_t threadChannel = xthreads_access_threadChannel(currentThreadId);
 
     // Case 4 - other threads hit barrier
     // Wait for the next thread in the stack to message us, then pass the message on to the next

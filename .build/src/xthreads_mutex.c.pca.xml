@@ -45,15 +45,11 @@
   <fCall global="true" name="xthreads_mutex_unlock"/>
   <fCall global="true" name="xthreads_mutex_unlock.nstackwords"/>
   <fCall global="true" name="xthreads_threadqueue_read.nstackwords"/>
-  <fCall global="true" name="iprintf.nstackwords"/>
   <fCall global="true" name="xthreads_mutex_unlock.maxcores"/>
-  <fCall global="true" name="iprintf.maxcores"/>
   <fCall global="true" name="xthreads_threadqueue_read.maxcores"/>
   <fCall global="true" name="xthreads_mutex_unlock.maxtimers"/>
-  <fCall global="true" name="iprintf.maxtimers"/>
   <fCall global="true" name="xthreads_threadqueue_read.maxtimers"/>
   <fCall global="true" name="xthreads_mutex_unlock.maxchanends"/>
-  <fCall global="true" name="iprintf.maxchanends"/>
   <fCall global="true" name="xthreads_threadqueue_read.maxchanends"/>
   <fCall global="true" name="xthreads_mutex_timedlock"/>
   <fCall global="true" name="xthreads_mutex_timedlock.nstackwords"/>
@@ -79,5 +75,4 @@
   <fCall global="true" name="xthreads_channelwait_nocancel_timed"/>
   <fCall global="true" name="xthreads_threadqueue_skip"/>
   <fCall global="true" name="xthreads_globals"/>
-  <fCall global="true" name="iprintf"/>
 </preCompilationAnalysis>

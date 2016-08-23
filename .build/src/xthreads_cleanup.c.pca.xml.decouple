@@ -3,18 +3,37 @@
   <fCall global="true" name="xthreads_cleanup_push.nstackwords"/>
   <fCall global="true" name="xthreads_self.nstackwords"/>
   <fCall global="true" name="malloc.nstackwords"/>
+  <fCall global="true" name="iprintf.nstackwords"/>
+  <fCall global="true" name="exit.nstackwords"/>
   <fCall global="true" name="xthreads_cleanup_push.maxcores"/>
+  <fCall global="true" name="exit.maxcores"/>
+  <fCall global="true" name="iprintf.maxcores"/>
   <fCall global="true" name="malloc.maxcores"/>
   <fCall global="true" name="xthreads_self.maxcores"/>
   <fCall global="true" name="xthreads_cleanup_push.maxtimers"/>
+  <fCall global="true" name="exit.maxtimers"/>
+  <fCall global="true" name="iprintf.maxtimers"/>
   <fCall global="true" name="malloc.maxtimers"/>
   <fCall global="true" name="xthreads_self.maxtimers"/>
   <fCall global="true" name="xthreads_cleanup_push.maxchanends"/>
+  <fCall global="true" name="exit.maxchanends"/>
+  <fCall global="true" name="iprintf.maxchanends"/>
   <fCall global="true" name="malloc.maxchanends"/>
   <fCall global="true" name="xthreads_self.maxchanends"/>
   <fCall global="true" name="xthreads_cleanup_pop"/>
+  <fCall global="true" name="xthreads_cleanup_drop"/>
+  <fCall global="true" name="xthreads_cleanup_drop.nstackwords"/>
+  <fCall global="true" name="free.nstackwords"/>
+  <fCall global="true" name="xthreads_cleanup_drop.maxcores"/>
+  <fCall global="true" name="free.maxcores"/>
+  <fCall global="true" name="xthreads_cleanup_drop.maxtimers"/>
+  <fCall global="true" name="free.maxtimers"/>
+  <fCall global="true" name="xthreads_cleanup_drop.maxchanends"/>
+  <fCall global="true" name="free.maxchanends"/>
   <fCall global="true" name="xthreads_self"/>
   <fCall global="true" name="malloc"/>
   <fCall global="true" name="free"/>
+  <fCall global="true" name="exit"/>
   <fCall global="true" name="xthreads_globals"/>
+  <fCall global="true" name="iprintf"/>
 </preCompilationAnalysis>

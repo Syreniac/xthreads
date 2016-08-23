@@ -18,7 +18,7 @@ static void xthreads_rwlock_lock(xthreads_rwlock_t *rwlock, xthreads_threadqueue
 
 
 void xthreads_rwlock_init(xthreads_rwlock_t *rwlock, xthreads_rwlockattr_t *attr){
-    int x = 0;
+    int x = XTHREADS_NOTHREAD;
     rwlock->templocked = XTHREADS_SPINBLOCK;
     xthreads_threadqueue_init(&rwlock->write_queue);
     xthreads_threadqueue_init(&rwlock->read_queue);

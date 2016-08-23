@@ -8,10 +8,9 @@
 #ifndef XTHREADS_ONCE_H_
 #define XTHREADS_ONCE_H_
 
+#define XTHREADS_ONCE_INIT -1
 
-typedef struct xthreads_once{
-    xthreads_t doneBy;
-} xthreads_once_t;
+typedef xthreads_t xthreads_once_t;
 
 int xthreads_once(volatile xthreads_once_t *controller, void (*routine)(void));
 

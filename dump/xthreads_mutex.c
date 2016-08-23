@@ -83,9 +83,7 @@ int xthreads_mutex_unlock(xthreads_mutex_t *mutex){
     // Send a close signal on the channel activating the next thread in the process
     xthreads_t next_thread = xthreads_threadqueue_read(&mutex->queue);
 
-    int i = 0;
     while(next_thread == XTHREADS_TIMEREMOVEDTHREAD){
-        i++;
         next_thread = xthreads_threadqueue_read(&mutex->queue);
     }
 
@@ -93,12 +91,10 @@ int xthreads_mutex_unlock(xthreads_mutex_t *mutex){
         mutex->activeThread = XTHREADS_NOTHREAD;
         return XTHREADS_ENONE;
     }
-
     // Get the channel ends
     xthreads_channel_t chanend = xthreads_globals.stacks[currentThreadId].data.threadChannel;
     xthreads_channel_t chandest = xthreads_globals.stacks[next_thread].data.threadChannel;
 
-    xthreads_printBytes(chandest);
     // Send a close token to wake the next thread up
     __asm__ __volatile__(
             "setd res[%0], %1\n"
@@ -133,13 +129,14 @@ int xthreads_mutex_timedlock(xthreads_mutex_t *mutex, unsigned int time){
         if(success == XTHREADS_ENONE){
             xthreads_threadqueue_nullify(&mutex->queue,index);
             mutex->activeThread = currentThreadId;
+            return XTHREADS_ENONE;
         }
         else{
             xthreads_spin_lock_inner((xthreads_spin_t*)mutex,currentThreadId);
             xthreads_threadqueue_skip(&mutex->queue,index);
             xthreads_spin_unlock_inner((xthreads_spin_t*)mutex);
+            return XTHREADS_ETIMEDOUT;
         }
-        return success;
     }
 }
 

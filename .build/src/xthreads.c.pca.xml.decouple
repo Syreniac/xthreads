@@ -8,76 +8,111 @@
   <fCall global="true" name="iprintf.maxtimers"/>
   <fCall global="true" name="xthreads_cleanup_test.maxchanends"/>
   <fCall global="true" name="iprintf.maxchanends"/>
+  <fCall global="true" name="xthreads_task_test_sub"/>
+  <fCall global="true" name="xthreads_task_test_sub.nstackwords"/>
+  <fCall global="true" name="puts.nstackwords"/>
+  <fCall global="true" name="xthreads_task_test_sub.maxcores"/>
+  <fCall global="true" name="puts.maxcores"/>
+  <fCall global="true" name="xthreads_task_test_sub.maxtimers"/>
+  <fCall global="true" name="puts.maxtimers"/>
+  <fCall global="true" name="xthreads_task_test_sub.maxchanends"/>
+  <fCall global="true" name="puts.maxchanends"/>
   <fCall global="true" name="xthreads_task_test"/>
   <fCall global="true" name="xthreads_task_test.nstackwords"/>
-  <fCall global="true" name="xthreads_cleanup_push.nstackwords"/>
+  <fCall global="true" name="xthreads_setcanceltype.nstackwords"/>
+  <fCall global="true" name="xthreads_setcancelstate.nstackwords"/>
   <fCall global="true" name="xthreads_self.nstackwords"/>
   <fCall global="true" name="xthreads_mutex2_timedlock.nstackwords"/>
-  <fCall global="true" name="xthreads_mutex2_unlock.nstackwords"/>
+  <fCall global="true" name="xthreads_testcancel.nstackwords"/>
   <fCall global="true" name="xthreads_barrier_wait.nstackwords"/>
-  <fCall global="true" name="xthreads_mutex2_lock.nstackwords"/>
+  <fCall global="true" name="xthreads_mutex2_unlock.nstackwords"/>
   <fCall global="true" name="xthreads_task_test.maxcores"/>
   <fCall global="true" name="xthreads_barrier_wait.maxcores"/>
-  <fCall global="true" name="xthreads_cleanup_push.maxcores"/>
-  <fCall global="true" name="xthreads_mutex2_lock.maxcores"/>
   <fCall global="true" name="xthreads_mutex2_timedlock.maxcores"/>
   <fCall global="true" name="xthreads_mutex2_unlock.maxcores"/>
   <fCall global="true" name="xthreads_self.maxcores"/>
+  <fCall global="true" name="xthreads_setcancelstate.maxcores"/>
+  <fCall global="true" name="xthreads_setcanceltype.maxcores"/>
+  <fCall global="true" name="xthreads_testcancel.maxcores"/>
   <fCall global="true" name="xthreads_task_test.maxtimers"/>
   <fCall global="true" name="xthreads_barrier_wait.maxtimers"/>
-  <fCall global="true" name="xthreads_cleanup_push.maxtimers"/>
-  <fCall global="true" name="xthreads_mutex2_lock.maxtimers"/>
   <fCall global="true" name="xthreads_mutex2_timedlock.maxtimers"/>
   <fCall global="true" name="xthreads_mutex2_unlock.maxtimers"/>
   <fCall global="true" name="xthreads_self.maxtimers"/>
+  <fCall global="true" name="xthreads_setcancelstate.maxtimers"/>
+  <fCall global="true" name="xthreads_setcanceltype.maxtimers"/>
+  <fCall global="true" name="xthreads_testcancel.maxtimers"/>
   <fCall global="true" name="xthreads_task_test.maxchanends"/>
   <fCall global="true" name="xthreads_barrier_wait.maxchanends"/>
-  <fCall global="true" name="xthreads_cleanup_push.maxchanends"/>
-  <fCall global="true" name="xthreads_mutex2_lock.maxchanends"/>
   <fCall global="true" name="xthreads_mutex2_timedlock.maxchanends"/>
   <fCall global="true" name="xthreads_mutex2_unlock.maxchanends"/>
   <fCall global="true" name="xthreads_self.maxchanends"/>
+  <fCall global="true" name="xthreads_setcancelstate.maxchanends"/>
+  <fCall global="true" name="xthreads_setcanceltype.maxchanends"/>
+  <fCall global="true" name="xthreads_testcancel.maxchanends"/>
+  <fCall global="true" name="xthreads_task_test2"/>
+  <fCall global="true" name="xthreads_task_test2.nstackwords"/>
+  <fCall global="true" name="xthreads_mutex2_lock.nstackwords"/>
+  <fCall global="true" name="xthreads_task_test2.maxcores"/>
+  <fCall global="true" name="xthreads_mutex2_lock.maxcores"/>
+  <fCall global="true" name="xthreads_task_test2.maxtimers"/>
+  <fCall global="true" name="xthreads_mutex2_lock.maxtimers"/>
+  <fCall global="true" name="xthreads_task_test2.maxchanends"/>
+  <fCall global="true" name="xthreads_mutex2_lock.maxchanends"/>
+  <fCall global="true" name="xthreads_configureMain"/>
+  <fCall global="true" name="xthreads_configureMain.nstackwords"/>
+  <fCall global="true" name="xthreads_configureMain.maxcores"/>
+  <fCall global="true" name="xthreads_configureMain.maxtimers"/>
+  <fCall global="true" name="xthreads_configureMain.maxchanends"/>
   <fCall global="true" name="main"/>
   <fCall global="true" name="main.nstackwords"/>
-  <fCall global="true" name="xthreads_mutex2_init.nstackwords"/>
-  <fCall global="true" name="xthreads_barrier_init.nstackwords"/>
   <fCall global="true" name="malloc.nstackwords"/>
+  <fCall global="true" name="xthreads_rwlock2_init.nstackwords"/>
+  <fCall global="true" name="xthreads_barrier_init.nstackwords"/>
+  <fCall global="true" name="xthreads_mutex2_init.nstackwords"/>
   <fCall global="true" name="xthreads_create.nstackwords"/>
+  <fCall global="true" name="xthreads_cancel.nstackwords"/>
   <fCall global="true" name="xthreads_join.nstackwords"/>
-  <fCall global="true" name="puts.nstackwords"/>
   <fCall global="true" name="main.maxcores"/>
   <fCall global="true" name="malloc.maxcores"/>
-  <fCall global="true" name="puts.maxcores"/>
   <fCall global="true" name="xthreads_barrier_init.maxcores"/>
+  <fCall global="true" name="xthreads_cancel.maxcores"/>
   <fCall global="true" name="xthreads_create.maxcores"/>
   <fCall global="true" name="xthreads_join.maxcores"/>
   <fCall global="true" name="xthreads_mutex2_init.maxcores"/>
+  <fCall global="true" name="xthreads_rwlock2_init.maxcores"/>
   <fCall global="true" name="main.maxtimers"/>
   <fCall global="true" name="malloc.maxtimers"/>
-  <fCall global="true" name="puts.maxtimers"/>
   <fCall global="true" name="xthreads_barrier_init.maxtimers"/>
+  <fCall global="true" name="xthreads_cancel.maxtimers"/>
   <fCall global="true" name="xthreads_create.maxtimers"/>
   <fCall global="true" name="xthreads_join.maxtimers"/>
   <fCall global="true" name="xthreads_mutex2_init.maxtimers"/>
+  <fCall global="true" name="xthreads_rwlock2_init.maxtimers"/>
   <fCall global="true" name="main.maxchanends"/>
   <fCall global="true" name="malloc.maxchanends"/>
-  <fCall global="true" name="puts.maxchanends"/>
   <fCall global="true" name="xthreads_barrier_init.maxchanends"/>
+  <fCall global="true" name="xthreads_cancel.maxchanends"/>
   <fCall global="true" name="xthreads_create.maxchanends"/>
   <fCall global="true" name="xthreads_join.maxchanends"/>
   <fCall global="true" name="xthreads_mutex2_init.maxchanends"/>
+  <fCall global="true" name="xthreads_rwlock2_init.maxchanends"/>
   <fCall global="true" name="xthreads_globals"/>
+  <fCall global="true" name="xthreads_setcanceltype"/>
+  <fCall global="true" name="xthreads_setcancelstate"/>
   <fCall global="true" name="xthreads_self"/>
-  <fCall global="true" name="xthreads_cleanup_push"/>
-  <fCall global="true" name="xthreads_mutex2_lock"/>
-  <fCall global="true" name="xthreads_mutex2_unlock"/>
   <fCall global="true" name="xthreads_mutex2_timedlock"/>
+  <fCall global="true" name="xthreads_mutex2_unlock"/>
+  <fCall global="true" name="xthreads_mutex2_lock"/>
+  <fCall global="true" name="xthreads_testcancel"/>
   <fCall global="true" name="xthreads_barrier_wait"/>
   <fCall global="true" name="xthreads_task"/>
   <fCall global="true" name="malloc"/>
-  <fCall global="true" name="xthreads_mutex2_init"/>
+  <fCall global="true" name="xthreads_rwlock2_init"/>
   <fCall global="true" name="xthreads_barrier_init"/>
+  <fCall global="true" name="xthreads_mutex2_init"/>
   <fCall global="true" name="xthreads_create"/>
+  <fCall global="true" name="xthreads_cancel"/>
   <fCall global="true" name="xthreads_join"/>
   <fCall global="true" name="iprintf"/>
   <fCall global="true" name="puts"/>

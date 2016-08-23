@@ -6,14 +6,15 @@
  */
 
 #include "xthreads.h"
+#include "xthreads_access.h"
 #include "xthreads_channelwait.h"
 #include "xthreads_util.h"
 #include <stdio.h>
 #include <stdlib.h>
 
 void xthreads_channelwait(xthreads_t thread){
-    xthreads_channel_t signalChannel = xthreads_globals.stacks[thread].data.threadChannel;
-    xthreads_channel_t cancelChannel = xthreads_globals.stacks[thread].data.cancelChannel;
+    xthreads_channel_t signalChannel = xthreads_access_threadChannel(thread);
+    xthreads_channel_t cancelChannel = xthreads_access_cancelChannel(thread);
     char eeble = xthreads_getEeble();
     __asm__ __volatile__(
             "ldap r11, 0x5\n"
@@ -33,8 +34,8 @@ void xthreads_channelwait(xthreads_t thread){
 }
 
 int xthreads_channelwait_timed(const xthreads_t thread, const unsigned int time){
-    const xthreads_channel_t signalChannel = xthreads_globals.stacks[thread].data.threadChannel;
-    const xthreads_channel_t cancelChannel = xthreads_globals.stacks[thread].data.cancelChannel;
+    const xthreads_channel_t signalChannel = xthreads_access_threadChannel(thread);
+    const xthreads_channel_t cancelChannel = xthreads_access_cancelChannel(thread);
     register xthreads_resource_t timer asm("r5");
     register volatile int value = 0;
     char eeble = xthreads_getEeble();
@@ -81,7 +82,7 @@ int xthreads_channelwait_timed(const xthreads_t thread, const unsigned int time)
 }
 
 void xthreads_channelwait_nocancel(xthreads_t thread){
-    const xthreads_channel_t signalChannel = xthreads_globals.stacks[thread].data.threadChannel;
+    const xthreads_channel_t signalChannel = xthreads_access_threadChannel(thread);
     __asm__ __volatile__(
             "chkct res[%0], 1"
             : : "r" (signalChannel) :
@@ -89,7 +90,7 @@ void xthreads_channelwait_nocancel(xthreads_t thread){
     return;
 }
 int xthreads_channelwait_nocancel_timed(xthreads_t thread, unsigned int time){
-    register xthreads_channel_t signalChannel asm("r9") = xthreads_globals.stacks[thread].data.threadChannel;
+    register xthreads_channel_t signalChannel asm("r9") = xthreads_access_threadChannel(thread);
     register xthreads_resource_t timer asm("r8");
     register volatile int value = 0;
     char eeble = xthreads_getEeble();

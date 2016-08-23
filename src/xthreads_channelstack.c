@@ -47,6 +47,7 @@ void *xthreads_channelstack_start_data(volatile xthreads_channelstack_t *channel
 void xthreads_channelstack_cascade(volatile xthreads_channelstack_t *channelStack, xthreads_channel_t channel, xthreads_spin_t *spin){
     xthreads_channel_t targetChannel = channelStack->topChannel;
 
+
     __asm__ __volatile__(
             "setd res[%0], %1\n"
             "outct res[%0], 1"
@@ -78,9 +79,10 @@ void xthreads_channelstack_pushwait(volatile xthreads_channelstack_t *channelSta
     __asm__ __volatile__(
             "setd res[%0], %1\n"
             "chkct res[%0], 1\n"
+            : : "r" (channel), "r" (targetChannel) :);
+    __asm__ __volatile__(
             "outct res[%0], 1"
-            : : "r" (channel), "r" (targetChannel) :
-    );
+            : : "r" (channel) :);
     return;
 }
 

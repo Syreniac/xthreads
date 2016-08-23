@@ -43,5 +43,10 @@
   <fCall global="true" name="xthreads_spin_trylock_inner.maxcores"/>
   <fCall global="true" name="xthreads_spin_trylock_inner.maxtimers"/>
   <fCall global="true" name="xthreads_spin_trylock_inner.maxchanends"/>
+  <fCall global="true" name="xthreads_spin_lock_inner_events"/>
+  <fCall global="true" name="xthreads_spin_lock_inner_events.nstackwords"/>
+  <fCall global="true" name="xthreads_spin_lock_inner_events.maxcores"/>
+  <fCall global="true" name="xthreads_spin_lock_inner_events.maxtimers"/>
+  <fCall global="true" name="xthreads_spin_lock_inner_events.maxchanends"/>
   <fCall global="true" name="xthreads_self"/>
 </preCompilationAnalysis>

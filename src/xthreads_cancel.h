@@ -8,19 +8,18 @@
 #ifndef XTHREADS_CANCEL_H_
 #define XTHREADS_CANCEL_H_
 
-#define XTHREADS_CANCEL_DISABLED 0x00
-#define XTHREADS_CANCEL_ENABLED 0x10
-#define XTHREADS_CANCEL_DEFERRED 0x00
-#define XTHREADS_CANCEL_ASYNC 0x10
+#include "xthreads.h"
 
 void xthreads_cancel(xthreads_t threadId);
 void xthreads_testcancel(void);
-int xthreads_setcanceltype(int type, int *oldType);
-int xthreads_setcancelstate(int state, int *oldState);
+int xthreads_setcanceltype(xthreads_canceltype_t type, xthreads_canceltype_t *oldType);
+int xthreads_setcancelstate(xthreads_cancelstate_t state, xthreads_cancelstate_t *oldState);
+void xthreads_cancel(const xthreads_t thread);
+void xthreads_cancel_event(void);
 
-inline int xthreads_cancellationPointCheck(xthreads_t currentThreadId){
-   return (xthreads_globals.stacks[currentThreadId].data.cancelState == XTHREADS_CANCEL_ENABLED &&
-           xthreads_globals.stacks[currentThreadId].data.cancelType == XTHREADS_CANCEL_DEFERRED);
+inline void xthreads_cancel_revector(xthreads_channel_t cancelChannel){
+    void *revector = &xthreads_cancel_event;
+    __asm__ __volatile__("setv res[%0], %1\n" : : "r" (cancelChannel), "r" (revector) :);
 }
 
 #endif /* XTHREADS_CANCEL_H_ */

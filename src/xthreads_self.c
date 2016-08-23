@@ -6,12 +6,12 @@
  */
 
 #include "xthreads.h"
+#include "xthreads_self.h"
 
 /* Really gets the index of the stack space of the calling thread, but that functions as the id
  * in the current structure
  */
-
-int xthreads_self(void){
+xthreads_t xthreads_self(void){
     int i = 0;
     register int volatile currentThreadId = 0;
     __asm__ __volatile__("get r11, id" : : : "r11");
@@ -24,5 +24,10 @@ int xthreads_self(void){
         i++;
     }
 
-    return -1;
+    return XTHREADS_NOTHREAD;
 }
+
+xthreads_t xthreads_self_outer(void){
+    return xthreads_self() % NUM_OF_THREADS;
+}
+// TODO - update this to work with numerous threads
