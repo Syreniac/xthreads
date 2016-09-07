@@ -19,13 +19,9 @@
   <fCall global="true" name="xthreads_spin_lock_inner.nstackwords"/>
   <fCall global="true" name="xthreads_spin_unlock_inner.nstackwords"/>
   <fCall global="true" name="xthreads_channelstack_start.nstackwords"/>
-  <fCall global="true" name="iprintf.nstackwords"/>
-  <fCall global="true" name="exit.nstackwords"/>
   <fCall global="true" name="xthreads_channelstack_cascade.nstackwords"/>
   <fCall global="true" name="xthreads_channelstack_pushwait.nstackwords"/>
   <fCall global="true" name="xthreads_barrier_wait.maxcores"/>
-  <fCall global="true" name="exit.maxcores"/>
-  <fCall global="true" name="iprintf.maxcores"/>
   <fCall global="true" name="xthreads_channelstack_cascade.maxcores"/>
   <fCall global="true" name="xthreads_channelstack_pushwait.maxcores"/>
   <fCall global="true" name="xthreads_channelstack_start.maxcores"/>
@@ -33,8 +29,6 @@
   <fCall global="true" name="xthreads_spin_lock_inner.maxcores"/>
   <fCall global="true" name="xthreads_spin_unlock_inner.maxcores"/>
   <fCall global="true" name="xthreads_barrier_wait.maxtimers"/>
-  <fCall global="true" name="exit.maxtimers"/>
-  <fCall global="true" name="iprintf.maxtimers"/>
   <fCall global="true" name="xthreads_channelstack_cascade.maxtimers"/>
   <fCall global="true" name="xthreads_channelstack_pushwait.maxtimers"/>
   <fCall global="true" name="xthreads_channelstack_start.maxtimers"/>
@@ -42,8 +36,6 @@
   <fCall global="true" name="xthreads_spin_lock_inner.maxtimers"/>
   <fCall global="true" name="xthreads_spin_unlock_inner.maxtimers"/>
   <fCall global="true" name="xthreads_barrier_wait.maxchanends"/>
-  <fCall global="true" name="exit.maxchanends"/>
-  <fCall global="true" name="iprintf.maxchanends"/>
   <fCall global="true" name="xthreads_channelstack_cascade.maxchanends"/>
   <fCall global="true" name="xthreads_channelstack_pushwait.maxchanends"/>
   <fCall global="true" name="xthreads_channelstack_start.maxchanends"/>
@@ -54,10 +46,8 @@
   <fCall global="true" name="xthreads_self"/>
   <fCall global="true" name="xthreads_spin_lock_inner"/>
   <fCall global="true" name="xthreads_channelstack_pushwait"/>
-  <fCall global="true" name="exit"/>
   <fCall global="true" name="xthreads_channelstack_cascade"/>
   <fCall global="true" name="xthreads_spin_unlock_inner"/>
   <fCall global="true" name="xthreads_channelstack_start"/>
   <fCall global="true" name="xthreads_globals"/>
-  <fCall global="true" name="iprintf"/>
 </preCompilationAnalysis>

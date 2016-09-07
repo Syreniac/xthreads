@@ -19,7 +19,7 @@ int xthreads_spin_unlock(xthreads_spin_t *spin);
 int xthreads_spin_trylock(xthreads_spin_t *spin);
 // Other structures inherit certain functionality of spin locks that these functions are useful for
 // accessing.
-void xthreads_spin_lock_inner(volatile xthreads_spin_t *spin, const xthreads_t currentThreadId);
+void xthreads_spin_lock_inner(xthreads_spin_t *spin, const xthreads_t currentThreadId);
 void xthreads_spin_unlock_inner(xthreads_spin_t *spin);
 int xthreads_spin_trylock_inner(volatile xthreads_spin_t *spin, const xthreads_t currentThreadId);
 void xthreads_spin_lock_inner_events(volatile xthreads_spin_t *spin, const xthreads_t xthreads_currentThreadId);

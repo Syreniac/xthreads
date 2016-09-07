@@ -53,14 +53,20 @@ int xthreads_join(xthreads_t threadId, void** retval){
     void* returned;
 
     if(xthreads_check_access(threadId) == 0){
+        printf("stale thread id\n");
         return XTHREADS_EINVAL;
     }
+    printf("thread id: %d\n", threadId);
     threadId = threadId % NUM_OF_THREADS;
+    printf("thread id: %d\n", threadId);
     data = &xthreads_globals.stacks[threadId].data;
+    __asm__("nop\n");
     if(data->resourceId == 0){
+        printf("nonrunning thread id\n");
         return XTHREADS_EINVAL;
     }
     if(data->detached == XTHREADS_CREATE_DETACHED){
+        printf("detached thread\n");
         return XTHREADS_EINVAL;
     }
 
@@ -69,6 +75,7 @@ int xthreads_join(xthreads_t threadId, void** retval){
 
     switch(returnChannel){
         case -1:
+            printf("-1\n");
             // The thread is paused waiting for a join
             // We'll try to put ourself in as the return channel
             data->returnChannel = selfChannel;
@@ -95,11 +102,11 @@ int xthreads_join(xthreads_t threadId, void** retval){
             }
             break;
         case 0:
+            printf("0\n");
             data->returnChannel = selfChannel;
             asm("nop\n");
             returnChannel = data->returnChannel;
             if(returnChannel == selfChannel){
-                printf("%d\n",data->returnChannel);
                 __asm__ __volatile__(
                         "in %0, res[%1]\n"
                         "chkct res[%1], 1"

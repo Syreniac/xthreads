@@ -66,12 +66,13 @@ xthreads_t xthreads_create_startThread(char detachState, int threadId, int curre
     // Write data into the stack structure
     threadData->resourceId = threadId;
     threadData->threadId = shiftedThreadId;
-    threadData->detached = XTHREADS_CREATE_UNDETACHED;
     threadData->parentThreadID = currentThreadId;
     if(detachState == XTHREADS_CREATE_DETACHED){
         threadData->returnChannel = -2;
+        threadData->detached = XTHREADS_CREATE_DETACHED;
     }
     else{
+        threadData->detached = XTHREADS_CREATE_UNDETACHED;
         threadData->returnChannel = 0;
     }
     __asm__ __volatile__(
@@ -90,6 +91,13 @@ void xthreads_create(xthreads_t *thread, const xthreads_attr_t *attr, void *(sta
     xthreads_stack_t* stackSpace;
     int i = 0;
     register int volatile currentThreadId asm("r11") = 0;
+    char detachState;
+    if(attr == NULL){
+        detachState = XTHREADS_CREATE_UNDETACHED;
+    }
+    else{
+        detachState = attr->detachState;
+    }
 
 
     // Read out the id of the current thread
@@ -100,7 +108,7 @@ void xthreads_create(xthreads_t *thread, const xthreads_attr_t *attr, void *(sta
     stackPtr = &stackSpace->bytes[THREAD_STACK_SIZE];
     threadData = &stackSpace->data;
 
-    xthreads_create_acquireThread(attr->detachState, &threadId);
+    xthreads_create_acquireThread(detachState, &threadId);
 
     // Initialise the thread with meaningful data.
     // ASSUMPTION: Threads inherit data and constant pointers from the parent implicitly
@@ -116,9 +124,11 @@ void xthreads_create(xthreads_t *thread, const xthreads_attr_t *attr, void *(sta
     /* In theory, because we've marked the thread header when selecting it, there should be
      * no race condition here when writing actual data into it here
      */
-    xthreads_create_startThread(attr->detachState, threadId, currentThreadId, threadData);
+    xthreads_create_startThread(detachState, threadId, currentThreadId, threadData);
+    printf("created thread at %d, %d\n",i,xthreads_globals.stacks[i].data.count * NUM_OF_THREADS);
     if(thread != 0x0){
-        *thread = i;
+        *thread = i + xthreads_globals.stacks[i].data.count * NUM_OF_THREADS;
+        printf("%d\n",*thread);
     }
 }
 

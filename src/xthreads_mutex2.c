@@ -381,6 +381,8 @@ int xthreads_mutex2_timedlock(volatile xthreads_mutex2_t *mutex,const xthreads_t
      */
 
     // timerTriggeredReturn:
+    // I would check, but the only way the code ever gets to here is when the timer
+    // throws an event, meaning that it exists and is not unallocated
     __asm__ __volatile__("edu res[%0]\n"
                          "freer res[%1]" : : "r" (ourChannel), "r" (timer) : );
     if(cancelType != BLANK){
@@ -390,7 +392,5 @@ int xthreads_mutex2_timedlock(volatile xthreads_mutex2_t *mutex,const xthreads_t
             __asm__ __volatile__("setsr 0x1\n");
         }
     }
-    // I would check, but the only way the code ever gets to here is when the timer
-    // throws an event, meaning that it exists and is not unallocated
     return XTHREADS_ETIMEDOUT;
 }

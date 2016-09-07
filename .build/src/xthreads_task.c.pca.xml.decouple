@@ -4,20 +4,21 @@
   <fCall global="true" name="xthreads_task_exit"/>
   <fCall global="true" name="xthreads_task_exit.nstackwords"/>
   <fCall global="true" name="xthreads_self_outer.nstackwords"/>
-  <fCall global="true" name="iprintf.nstackwords"/>
   <fCall global="true" name="xthreads_task_end.nstackwords"/>
+  <fCall global="true" name="dummyFunction.nstackwords"/>
   <fCall global="true" name="xthreads_task_exit.maxcores"/>
-  <fCall global="true" name="iprintf.maxcores"/>
+  <fCall global="true" name="dummyFunction.maxcores"/>
   <fCall global="true" name="xthreads_self_outer.maxcores"/>
   <fCall global="true" name="xthreads_task_end.maxcores"/>
   <fCall global="true" name="xthreads_task_exit.maxtimers"/>
-  <fCall global="true" name="iprintf.maxtimers"/>
+  <fCall global="true" name="dummyFunction.maxtimers"/>
   <fCall global="true" name="xthreads_self_outer.maxtimers"/>
   <fCall global="true" name="xthreads_task_end.maxtimers"/>
   <fCall global="true" name="xthreads_task_exit.maxchanends"/>
-  <fCall global="true" name="iprintf.maxchanends"/>
+  <fCall global="true" name="dummyFunction.maxchanends"/>
   <fCall global="true" name="xthreads_self_outer.maxchanends"/>
   <fCall global="true" name="xthreads_task_end.maxchanends"/>
+  <fCall global="true" name="dummyFunction"/>
   <fCall global="true" name="xthreads_task_end"/>
   <fCall global="true" name="xthreads_task_endsudden"/>
   <fCall global="true" name="xthreads_task_endsudden.nstackwords"/>
@@ -33,5 +34,4 @@
   <fCall global="true" name="xthreads_self_outer"/>
   <fCall global="true" name="xthreads_globals"/>
   <fCall global="true" name="puts"/>
-  <fCall global="true" name="iprintf"/>
 </preCompilationAnalysis>

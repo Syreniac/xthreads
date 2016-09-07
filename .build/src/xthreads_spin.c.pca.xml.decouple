@@ -12,11 +12,15 @@
   <fCall global="true" name="xthreads_spin_lock"/>
   <fCall global="true" name="xthreads_spin_lock.nstackwords"/>
   <fCall global="true" name="xthreads_self.nstackwords"/>
+  <fCall global="true" name="__assert_func.nstackwords"/>
   <fCall global="true" name="xthreads_spin_lock.maxcores"/>
+  <fCall global="true" name="__assert_func.maxcores"/>
   <fCall global="true" name="xthreads_self.maxcores"/>
   <fCall global="true" name="xthreads_spin_lock.maxtimers"/>
+  <fCall global="true" name="__assert_func.maxtimers"/>
   <fCall global="true" name="xthreads_self.maxtimers"/>
   <fCall global="true" name="xthreads_spin_lock.maxchanends"/>
+  <fCall global="true" name="__assert_func.maxchanends"/>
   <fCall global="true" name="xthreads_self.maxchanends"/>
   <fCall global="true" name="xthreads_spin_lock_inner"/>
   <fCall global="true" name="xthreads_spin_lock_inner.nstackwords"/>
@@ -49,4 +53,5 @@
   <fCall global="true" name="xthreads_spin_lock_inner_events.maxtimers"/>
   <fCall global="true" name="xthreads_spin_lock_inner_events.maxchanends"/>
   <fCall global="true" name="xthreads_self"/>
+  <fCall global="true" name="__assert_func"/>
 </preCompilationAnalysis>

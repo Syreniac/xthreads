@@ -38,28 +38,32 @@ void xthreads_task(void *(*target)(void*), void* args, xthreads_data_t* threadDa
         printf("xthreads exception: unable to acquire channel for thread\n");
         exit(1);
     }
+    // Because we need to spoof cancel signals to ourself at certain points in event handling
+    // we'll set the destination here tautologously.
+    // It's not a major problem because this channel is *never* used to send signals to other channels
+    // Don't do this in real code, it'll cause bad things to happen!
     __asm__ __volatile__("setd res[%0], %0" : : "r" (threadData->cancelChannel) : );
 
     returnedValue = target((void*)args);
     xthreads_task_exit(returnedValue);
 }
 
-void xthreads_task_exit(void* retval){
+__attribute__((noinline)) xthreads_channel_t dummyFunction(xthreads_t self){
+    return xthreads_self_returnChannel(self);
+}
+
+void __attribute__((noinline,noreturn)) xthreads_task_exit(void* retval){
     __asm__ __volatile("clre");
     xthreads_t self = xthreads_self_outer();
-    printf("test self; %d\n",self);
-    printf("test detached %d v %d\n",xthreads_self_detached(self),XTHREADS_CREATE_DETACHED);
-    printf("|%d\n",xthreads_self_returnChannel(self));
     if(xthreads_self_detached(self) != XTHREADS_CREATE_DETACHED){
-        __asm__ __volatile__("nop\n");
         const register xthreads_channel_t selfChannel asm("r10") = xthreads_self_threadChannel(self);
         register xthreads_channel_t returnChannel asm("r9") = xthreads_self_returnChannel(self);
-        __asm__ __volatile__("nop\n");
         if(returnChannel == 0){
             // No thread waiting on us
             // Sleep until woken
             xthreads_globals.stacks[self].data.returnChannel = -1;
             __asm__ __volatile__("chkct res[%0], 1\n" : : "r" (selfChannel) :);
+            returnChannel = dummyFunction(self);
         }
         __asm__ __volatile(
                 "setd res[%0], %1\n"
@@ -67,17 +71,17 @@ void xthreads_task_exit(void* retval){
                 "outct res[%0], 1\n"
                 : : "r" (selfChannel), "r" (returnChannel), "r" (retval) :);
     }
-    xthreads_globals.stacks[self].data.resourceId = 0;
     xthreads_data_t *threadData = &xthreads_globals.stacks[self].data;
     xthreads_task_end(threadData);
 }
 #define XTHREADS_CANCELLED 0xffffffff
 void xthreads_task_endsudden(void){
+    __asm__ __volatile__("clre");
     printf("sudden ending\n");
     xthreads_task_exit((void*)(long)XTHREADS_CANCELLED);
 }
 
-void __attribute__ ((noinline)) xthreads_task_end(xthreads_data_t *threadData){
+void __attribute__ ((noinline,noreturn)) xthreads_task_end(xthreads_data_t *threadData){
 
     xthreads_task_cleanup(threadData);
 
@@ -94,13 +98,12 @@ void __attribute__ ((noinline)) xthreads_task_end(xthreads_data_t *threadData){
          * if we adjust the detached state before adjusting the threadId, we will not run into
          * race conditions
          */
-        threadData->detached = 0;
-        threadData->threadId = 0;
-        threadData->resourceId = 0;
-        __asm__ __volatile__(
-          "freet"
-        );
-        return;
+    //printf("freeting\n");
+    threadData->detached = 0;
+    threadData->threadId = 0;
+    printf("freet\n");
+    threadData->resourceId = 0;
+    __asm__ __volatile__("freet");
     //}
     /*
     // Otherwise mark that it's ready to be cleaned
