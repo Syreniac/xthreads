@@ -125,10 +125,8 @@ void xthreads_create(xthreads_t *thread, const xthreads_attr_t *attr, void *(sta
      * no race condition here when writing actual data into it here
      */
     xthreads_create_startThread(detachState, threadId, currentThreadId, threadData);
-    printf("created thread at %d, %d\n",i,xthreads_globals.stacks[i].data.count * NUM_OF_THREADS);
     if(thread != 0x0){
         *thread = i + xthreads_globals.stacks[i].data.count * NUM_OF_THREADS;
-        printf("%d\n",*thread);
     }
 }
 

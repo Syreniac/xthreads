@@ -56,9 +56,7 @@ int xthreads_join(xthreads_t threadId, void** retval){
         printf("stale thread id\n");
         return XTHREADS_EINVAL;
     }
-    printf("thread id: %d\n", threadId);
     threadId = threadId % NUM_OF_THREADS;
-    printf("thread id: %d\n", threadId);
     data = &xthreads_globals.stacks[threadId].data;
     __asm__("nop\n");
     if(data->resourceId == 0){

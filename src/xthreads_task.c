@@ -101,7 +101,6 @@ void __attribute__ ((noinline,noreturn)) xthreads_task_end(xthreads_data_t *thre
     //printf("freeting\n");
     threadData->detached = 0;
     threadData->threadId = 0;
-    printf("freet\n");
     threadData->resourceId = 0;
     __asm__ __volatile__("freet");
     //}

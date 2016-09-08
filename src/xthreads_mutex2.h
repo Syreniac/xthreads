@@ -9,6 +9,7 @@
 #define XTHREADS_MUTEX2_H_
 
 #include "xthreads.h"
+#include "xthreads_cleanup.h"
 
 typedef enum xthreads_mutex2types{
     NONE = 0,
@@ -28,6 +29,7 @@ typedef struct xthreads_mutex2{
     char waitCount;
     xthreads_mutex2type_t type;
     xthreads_t holding;
+    xthreads_cleanup_function_t *cleanup;
 } xthreads_mutex2_t;
 
 int xthreads_mutex2_init(xthreads_mutex2_t *mutex, xthreads_mutex2attr_t *attr);

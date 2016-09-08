@@ -14,7 +14,7 @@
 void *xthreads_test_task(void){
     __asm__(
             "ldc r0, 0x0\n"
-            "ldc r2, 0x1387\n"
+            "ldc r2, 0xffff\n"
             "eq r1, r0, r2\n"
             "bt r1, 0x3\n"
             "add r0, r0, 1\n"
@@ -38,9 +38,11 @@ void *xthreads_test_task2(int i){
     return NULL;
 }
 
-/*int main(void){
+int main(void){
     xthreads_attr_t attributes;
+    xthreads_attr_t attributes2;
     attributes.detachState = XTHREADS_CREATE_UNDETACHED;
+    attributes2.detachState = XTHREADS_CREATE_DETACHED;
     xthreads_t thread;
     unsigned int timeA = 0;
     unsigned int timeB = 0;
@@ -51,19 +53,19 @@ void *xthreads_test_task2(int i){
     __asm__ __volatile__("in %0, res[%1]" : "=r" (timeA) : "r" (timer) :);
 
     for(int i = 0; i < TEST_THREAD_COUNT - 1; i++){
-        xthreads_create(NULL, &attributes, &xthreads_test_task, NULL);
+        xthreads_create(NULL, &attributes2, &xthreads_test_task, NULL);
     }
     xthreads_create(&thread, &attributes, &xthreads_test_task, NULL);
     __asm__ __volatile__("in %0, res[%1]" : "=r" (timeB) : "r" (timer) :);
-    xthreads_test_task();
+    //xthreads_test_task();
     xthreads_join(thread,NULL);
     __asm__ __volatile__("in %0, res[%1]" : "=r" (timeC) : "r" (timer) : );
     printf("creation time: %d\n", timeB - timeA);
     printf("join time: %d\n", timeC - timeB);
     printf("done!");
     return 0;
-}*/
-
+}
+/*
 int main(void){
     int i = 0;
     while(1){
@@ -77,4 +79,4 @@ int main(void){
         printf("done\n");
     }
 }
-
+*/
